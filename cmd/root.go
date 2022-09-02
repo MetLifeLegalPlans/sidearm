@@ -6,6 +6,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var quiet bool
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "sidearm",
@@ -17,9 +19,6 @@ arbitrarily located hosts to generate nuanced HTTP load in a flexible
 but opinionated way.
 
 It can also be used in standalone mode on a single host.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -32,10 +31,7 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
+	rootCmd.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "disable response status output")
 	// rootCmd.PersistentFlags().String("configFile", "config.yml", "The spec file for your usecase")
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.sidearm.yaml)")

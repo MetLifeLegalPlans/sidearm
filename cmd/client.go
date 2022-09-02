@@ -25,7 +25,7 @@ var clientCmd = &cobra.Command{
 
 		go func() {
 			defer wg.Done()
-			client.Entrypoint(conf)
+			client.Entrypoint(conf, quiet)
 		}()
 
 		<-channels.Interrupt

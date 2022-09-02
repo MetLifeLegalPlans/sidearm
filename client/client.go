@@ -32,7 +32,7 @@ func logResult(code int, method, url string, color func(arg any) Value) {
 	)
 }
 
-func process(msg []byte) {
+func process(msg []byte, quiet bool) {
 	data := &config.Scenario{}
 	msgpack.Unmarshal(msg, data)
 
@@ -53,10 +53,16 @@ func process(msg []byte) {
 
 	resp, err = Client.Do(req)
 	if err != nil {
-		logResult(http.StatusRequestTimeout, data.Method, data.URL, Red)
+		if !quiet {
+			logResult(http.StatusRequestTimeout, data.Method, data.URL, Red)
+		}
 		return
 	}
 	defer resp.Body.Close()
+
+	if quiet {
+		return
+	}
 
 	statusCodeColor := Green
 	if resp.StatusCode >= 400 || err != nil {
@@ -65,7 +71,7 @@ func process(msg []byte) {
 	logResult(resp.StatusCode, data.Method, data.URL, statusCodeColor)
 }
 
-func Entrypoint(conf *config.Config) {
+func Entrypoint(conf *config.Config, quiet bool) {
 	receiver, err := zmq4.NewSocket(zmq4.PULL)
 	if err != nil {
 		panic(err)
@@ -83,7 +89,7 @@ func Entrypoint(conf *config.Config) {
 			return
 		default:
 			msg, _ := receiver.RecvBytes(0)
-			go process(msg)
+			go process(msg, quiet)
 		}
 	}
 }
