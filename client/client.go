@@ -9,6 +9,7 @@ import (
 
 	"sidearm/channels"
 	"sidearm/config"
+	"sidearm/dashboard"
 
 	. "github.com/logrusorgru/aurora/v3"
 	"github.com/pebbe/zmq4"
@@ -16,6 +17,7 @@ import (
 )
 
 var Client = &http.Client{}
+var sink *zmq4.Socket
 
 func init() {
 	Client.Timeout = 5 * time.Second
@@ -30,6 +32,21 @@ func logResult(code int, method, url string, color func(arg any) Value) {
 			Cyan(url),
 		),
 	)
+}
+
+func report(resp *http.Response, duration int64, scenario *config.Scenario) {
+	if sink == nil {
+		return
+	}
+
+	r := &dashboard.Result{
+		StatusCode: resp.StatusCode,
+		Duration:   duration,
+		Scenario:   *scenario,
+	}
+
+	msg, _ := msgpack.Marshal(r)
+	sink.SendBytes(msg, zmq4.DONTWAIT)
 }
 
 func process(msg []byte, quiet bool) {
@@ -51,16 +68,17 @@ func process(msg []byte, quiet bool) {
 		req, _ = http.NewRequest(data.Method, data.URL, nil)
 	}
 
+	start := time.Now()
 	resp, err = Client.Do(req)
-	if err != nil {
-		if !quiet {
-			logResult(http.StatusRequestTimeout, data.Method, data.URL, Red)
-		}
-		return
+	if err != nil && !quiet {
+		logResult(http.StatusRequestTimeout, data.Method, data.URL, Red)
 	}
 	defer resp.Body.Close()
+	elapsed := time.Since(start).Milliseconds()
 
-	if quiet {
+	report(resp, elapsed, data)
+
+	if quiet || err != nil {
 		return
 	}
 
@@ -81,6 +99,14 @@ func Entrypoint(conf *config.Config, quiet bool) {
 	err = receiver.Connect(conf.QueueConfig.Connect)
 	if err != nil {
 		panic(err)
+	}
+
+	if conf.SinkConfig.Enabled() {
+		sink, err = zmq4.NewSocket(zmq4.PUSH)
+		if err != nil {
+			panic(err)
+		}
+		defer sink.Close()
 	}
 
 	for {
