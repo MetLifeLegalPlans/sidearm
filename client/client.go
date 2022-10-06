@@ -91,10 +91,10 @@ func process(msg []byte, quiet bool) {
 
 func Entrypoint(conf *config.Config, quiet bool) {
 	receiver, err := zmq4.NewSocket(zmq4.PULL)
+	defer receiver.Close()
 	if err != nil {
 		panic(err)
 	}
-	defer receiver.Close()
 
 	err = receiver.Connect(conf.QueueConfig.Connect)
 	if err != nil {
@@ -107,6 +107,7 @@ func Entrypoint(conf *config.Config, quiet bool) {
 			panic(err)
 		}
 		defer sink.Close()
+		sink.Bind(conf.SinkConfig.Bind)
 	}
 
 	for {

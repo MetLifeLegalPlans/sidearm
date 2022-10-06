@@ -10,17 +10,17 @@ import (
 
 func Entrypoint(conf *config.Config) {
 	receiver, err := zmq4.NewSocket(zmq4.PULL)
-	if err != nil {
-		panic(err)
-	}
 	defer receiver.Close()
-
-	err = receiver.Bind(conf.SinkConfig.Bind)
 	if err != nil {
 		panic(err)
 	}
 
-	go ui()
+	err = receiver.Connect(conf.SinkConfig.Connect)
+	if err != nil {
+		panic(err)
+	}
+
+	// go ui()
 
 	for {
 		select {
