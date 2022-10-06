@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var quiet bool
+var verbose bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -31,7 +31,7 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().BoolVarP(&quiet, "quiet", "q", false, "disable response status output")
+	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "enable response status output")
 	// rootCmd.PersistentFlags().String("configFile", "config.yml", "The spec file for your usecase")
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.sidearm.yaml)")
