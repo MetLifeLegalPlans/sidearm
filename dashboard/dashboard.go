@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"sidearm/channels"
 	"sidearm/config"
+	"sidearm/db"
+	"sidearm/db/models"
 
 	"github.com/pebbe/zmq4"
+	"github.com/vmihailenco/msgpack/v5"
 )
 
 func Entrypoint(conf *config.Config) {
@@ -20,7 +23,11 @@ func Entrypoint(conf *config.Config) {
 		panic(err)
 	}
 
+	db.Setup(conf)
+
 	// go ui()
+
+	go worker(conf)
 
 	for {
 		select {
@@ -28,7 +35,10 @@ func Entrypoint(conf *config.Config) {
 			return
 		default:
 			msg, _ := receiver.RecvBytes(0)
-			fmt.Println(msg)
+			record := models.Response{}
+			msgpack.Unmarshal(msg, &record)
+			fmt.Println(record)
+			resultQueue <- record
 		}
 	}
 }
