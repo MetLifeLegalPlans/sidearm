@@ -6,8 +6,8 @@ import (
 
 type Response struct {
 	gorm.Model
-	StatusCode int
-	Method     string
-	URL        string
-	Duration   int64
+	StatusCode int    `gorm:"index"`
+	Method     string `gorm:"index"`
+	URL        string `gorm:"index"`
+	Duration   int64  `gorm:"index"`
 }
