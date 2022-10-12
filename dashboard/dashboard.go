@@ -1,7 +1,6 @@
 package dashboard
 
 import (
-	"fmt"
 	"sidearm/channels"
 	"sidearm/config"
 	"sidearm/db"
@@ -25,8 +24,7 @@ func Entrypoint(conf *config.Config) {
 
 	db.Setup(conf)
 
-	// go ui()
-
+	go ui()
 	go worker(conf)
 
 	for {
@@ -37,7 +35,6 @@ func Entrypoint(conf *config.Config) {
 			msg, _ := receiver.RecvBytes(0)
 			record := models.Response{}
 			msgpack.Unmarshal(msg, &record)
-			fmt.Println(record)
 			resultQueue <- record
 		}
 	}
