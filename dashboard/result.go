@@ -1,7 +1,7 @@
 package dashboard
 
 import (
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 )
 
 type Result struct {

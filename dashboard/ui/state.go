@@ -1,8 +1,8 @@
 package ui
 
 import (
-	"sidearm/db"
-	"sidearm/db/models"
+	"github.com/MetLifeLegalPlans/sidearm/db"
+	"github.com/MetLifeLegalPlans/sidearm/db/models"
 
 	"gorm.io/gorm"
 )

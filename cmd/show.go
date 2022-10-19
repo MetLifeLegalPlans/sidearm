@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"

@@ -4,7 +4,7 @@ import (
 	"github.com/mroth/weightedrand"
 
 	"github.com/vmihailenco/msgpack/v5"
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 	"time"
 )
 

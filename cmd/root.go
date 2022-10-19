@@ -10,7 +10,7 @@ var verbose bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "sidearm",
+	Use:   "github.com/MetLifeLegalPlans/sidearm",
 	Short: "Distributed HTTP load generator",
 	Long: `A distributed HTTP load generator for the rest of us. Inspired by https://github.com/rakyll/hey
 

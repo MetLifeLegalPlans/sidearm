@@ -9,8 +9,8 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"sidearm/config"
-	"sidearm/db/models"
+	"github.com/MetLifeLegalPlans/sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/db/models"
 )
 
 var Conn *gorm.DB

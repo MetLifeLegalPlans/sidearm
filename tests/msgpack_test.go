@@ -5,7 +5,7 @@ import (
 	"github.com/vmihailenco/msgpack/v5"
 	"testing"
 
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 )
 
 var scenario = &config.Scenario{

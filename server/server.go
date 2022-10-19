@@ -1,8 +1,8 @@
 package server
 
 import (
-	"sidearm/channels"
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/channels"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 	"time"
 
 	"github.com/pebbe/zmq4"

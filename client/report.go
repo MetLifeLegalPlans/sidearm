@@ -3,9 +3,9 @@ package client
 import (
 	"net/http"
 
-	"sidearm/channels"
-	"sidearm/config"
-	"sidearm/db/models"
+	"github.com/MetLifeLegalPlans/sidearm/channels"
+	"github.com/MetLifeLegalPlans/sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/db/models"
 
 	"github.com/pebbe/zmq4"
 	"github.com/vmihailenco/msgpack/v5"

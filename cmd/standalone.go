@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"sidearm/channels"
+	"github.com/MetLifeLegalPlans/sidearm/channels"
 
 	"github.com/spf13/cobra"
 )

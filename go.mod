@@ -1,4 +1,4 @@
-module sidearm
+module github.com/MetLifeLegalPlans/sidearm
 
 go 1.19
 

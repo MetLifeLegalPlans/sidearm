@@ -1,10 +1,10 @@
 package ui
 
 import (
-	"sidearm/channels"
-	"sidearm/config"
-	"sidearm/db"
-	"sidearm/db/models"
+	"github.com/MetLifeLegalPlans/sidearm/channels"
+	"github.com/MetLifeLegalPlans/sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/db"
+	"github.com/MetLifeLegalPlans/sidearm/db/models"
 	"time"
 
 	"github.com/rivo/tview"

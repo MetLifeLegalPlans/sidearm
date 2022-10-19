@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 
 	. "github.com/logrusorgru/aurora/v3"
 	"github.com/vmihailenco/msgpack/v5"

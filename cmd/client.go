@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"sidearm/channels"
-	"sidearm/client"
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/channels"
+	"github.com/MetLifeLegalPlans/sidearm/client"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 
 	"sync"
 )

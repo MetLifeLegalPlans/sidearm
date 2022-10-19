@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"sidearm/channels"
-	"sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/channels"
+	"github.com/MetLifeLegalPlans/sidearm/config"
 
 	. "github.com/logrusorgru/aurora/v3"
 	"github.com/pebbe/zmq4"

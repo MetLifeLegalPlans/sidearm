@@ -5,9 +5,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"sidearm/channels"
-	"sidearm/config"
-	"sidearm/server"
+	"github.com/MetLifeLegalPlans/sidearm/channels"
+	"github.com/MetLifeLegalPlans/sidearm/config"
+	"github.com/MetLifeLegalPlans/sidearm/server"
 )
 
 var serverCmd = &cobra.Command{

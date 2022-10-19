@@ -2,7 +2,7 @@ package main
 
 import (
 	"math/rand"
-	"sidearm/cmd"
+	"github.com/MetLifeLegalPlans/sidearm/cmd"
 	"time"
 )
 
