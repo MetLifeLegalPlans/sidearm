@@ -3,6 +3,7 @@ package dashboard
 import (
 	"sidearm/channels"
 	"sidearm/config"
+	"sidearm/dashboard/ui"
 	"sidearm/db"
 	"sidearm/db/models"
 
@@ -24,8 +25,8 @@ func Entrypoint(conf *config.Config) {
 
 	db.Setup(conf)
 
-	go ui()
-	go worker(conf)
+	go ui.Run(conf)
+	go eventReceiver(conf)
 
 	for {
 		select {

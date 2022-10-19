@@ -11,7 +11,7 @@ import (
 
 var resultQueue = make(chan models.Response, 1024*8)
 
-func worker(conf *config.Config) {
+func eventReceiver(conf *config.Config) {
 	var batch []models.Response
 
 	processAndReset := func() {
