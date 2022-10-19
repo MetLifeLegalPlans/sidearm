@@ -43,7 +43,7 @@ func runState() {
 			SetBorderPadding(1, 1, 1, 1)
 
 		bucket.Print(resultWidget)
-		flex.AddItem(resultWidget, len(url)+2, 1, false)
+		flex.AddItem(resultWidget, 0, 1, false)
 	}
 }
 
