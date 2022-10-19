@@ -26,11 +26,12 @@ You will need to mount your config file into the container so that it can be rea
 
 ## Running
 
-`sidearm` can be run in any of three ways:
+`sidearm` can be run in any of four ways:
 
 1. `server` mode (generates and distributes tasks to clients)
 2. `client` mode (receives and performs tasks from clients)
-3. `standalone` mode (runs both a client and a server)
+3. `dashboard` mode (runs a dashboard that receives and stores statistics)
+4. `standalone` mode (runs a client, server, and dashboard session all at once)
 
 All of these modes require a config file to be passed in as the first argument, but the configuration is identical between all of them - meaning you can use the same config file for both server and client.
 
@@ -51,9 +52,10 @@ queue:
   # If you are running the server on a different machine, then this will be
   # the address of the server as your client machine sees it
   connect: tcp://example.com:5557
-sink: # Currently unused, but will configure the dashboard mode receiver
+sink: # Configure the dashboard mode receiver
   bind: tcp://*:5558
   connect: tcp://example.com:5558
+dbPath: ./out.db # Where the dashboard receiver stores its data
 
 requests: 10000 # The number of requests to send per second at peak - REQUIRED
 duration: 300 # How many seconds it takes to reach the max send rate, default 0

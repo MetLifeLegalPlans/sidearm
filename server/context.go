@@ -1,7 +1,7 @@
 package server
 
 import (
-	wr "github.com/mroth/weightedrand"
+	"github.com/mroth/weightedrand"
 
 	"github.com/vmihailenco/msgpack/v5"
 	"sidearm/config"
@@ -10,7 +10,7 @@ import (
 
 type ServerContext struct {
 	Conf    *config.Config
-	Chooser *wr.Chooser
+	Chooser *weightedrand.Chooser
 	Start   time.Time
 	End     time.Time
 }
@@ -24,16 +24,16 @@ func NewContext(conf *config.Config) *ServerContext {
 
 	// Pre-encoding all of our choices here so that our message
 	// throughput is only limited by the speed of the socket
-	choices := make([]wr.Choice, len(conf.Scenarios))
+	choices := make([]weightedrand.Choice, len(conf.Scenarios))
 	for idx, val := range conf.Scenarios {
 		// Msgpack is SUBSTANTIALLY faster than JSON or YAML
 		// and can be easily transmitted as raw bytes without
 		// re-encoding
 		packed, _ := msgpack.Marshal(val)
-		choices[idx] = wr.NewChoice(packed, val.Weight)
+		choices[idx] = weightedrand.NewChoice(packed, val.Weight)
 	}
 
-	chooser, cerr := wr.NewChooser(choices...)
+	chooser, cerr := weightedrand.NewChooser(choices...)
 	if cerr != nil {
 		panic(cerr)
 	}

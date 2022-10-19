@@ -20,12 +20,16 @@ var clientCmd = &cobra.Command{
 			panic(err)
 		}
 
+		if !conf.QueueConfig.Enabled() {
+			panic("No socket configuration available for tasks, exiting")
+		}
+
 		wg := sync.WaitGroup{}
 		wg.Add(1)
 
 		go func() {
 			defer wg.Done()
-			client.Entrypoint(conf, quiet)
+			client.Entrypoint(conf, !verbose)
 		}()
 
 		<-channels.Interrupt

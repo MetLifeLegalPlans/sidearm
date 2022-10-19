@@ -17,3 +17,7 @@ func (a *AddressPair) SetDefaults() {
 		a.Bind = a.Connect
 	}
 }
+
+func (a *AddressPair) Enabled() bool {
+	return a.Bind != "" || a.Connect != ""
+}
