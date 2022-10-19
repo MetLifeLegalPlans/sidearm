@@ -19,10 +19,14 @@ func report(resp *http.Response, duration int64, scenario *config.Scenario) {
 	}
 
 	r := &models.Response{
-		StatusCode: resp.StatusCode,
+		StatusCode: 504,
 		Method:     scenario.Method,
 		URL:        scenario.URL,
 		Duration:   duration,
+	}
+
+	if resp != nil {
+		r.StatusCode = resp.StatusCode
 	}
 
 	reportQueue <- r
