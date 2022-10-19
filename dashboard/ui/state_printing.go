@@ -3,6 +3,7 @@ package ui
 import (
 	"fmt"
 	"io"
+	"sort"
 )
 
 var (
@@ -16,6 +17,7 @@ var (
 func (b *ResultBucket) Print(out io.Writer) {
 	b.PrintSuccessPercent(out)
 	b.PrintAverageResponseTime(out)
+	b.PrintResponseCodes(out)
 }
 
 func (b *ResultBucket) PrintSuccessPercent(out io.Writer) {
@@ -60,4 +62,27 @@ func (b *ResultBucket) PrintAverageResponseTime(out io.Writer) {
 		avgTime,
 		reset,
 	)
+}
+
+func (b *ResultBucket) PrintResponseCodes(out io.Writer) {
+	fmt.Fprint(out, "\n")
+
+	keys := make([]int, 0)
+	for key := range b.StatusCodes {
+		keys = append(keys, key)
+	}
+	sort.Ints(keys)
+
+	for _, code := range keys {
+		count := b.StatusCodes[code]
+
+		fmt.Fprintf(
+			out,
+			"%s%v%s: %v\n",
+			bold,
+			code,
+			reset,
+			count,
+		)
+	}
 }

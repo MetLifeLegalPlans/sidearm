@@ -63,7 +63,7 @@ func uiWorker() {
 
 func Run(conf *config.Config) {
 	app = tview.NewApplication()
-	flex = tview.NewFlex()
+	flex = tview.NewFlex().SetDirection(tview.FlexRow)
 
 	db.Setup(conf)
 	conn = db.Conn

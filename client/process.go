@@ -36,7 +36,10 @@ func process(msg []byte, quiet bool) {
 	if err != nil && !quiet {
 		logResult(http.StatusRequestTimeout, data.Method, data.URL, Red)
 	}
-	defer resp.Body.Close()
+
+	if err == nil {
+		defer resp.Body.Close()
+	}
 	elapsed := time.Since(start).Milliseconds()
 
 	report(resp, elapsed, data)
