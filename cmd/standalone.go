@@ -16,6 +16,7 @@ Designed to be used on a single machine.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		go clientCmd.Run(cmd, args)
 		go serverCmd.Run(cmd, args)
+		go dashboardCmd.Run(cmd, args)
 		<-channels.Running
 	},
 }
