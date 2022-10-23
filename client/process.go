@@ -3,6 +3,7 @@ package client
 import (
 	"bytes"
 	"encoding/json"
+	"io"
 	"net/http"
 	"time"
 
@@ -39,6 +40,7 @@ func process(msg []byte, quiet bool) {
 
 	if err == nil {
 		defer resp.Body.Close()
+		io.ReadAll(resp.Body)
 	}
 	elapsed := time.Since(start).Milliseconds()
 

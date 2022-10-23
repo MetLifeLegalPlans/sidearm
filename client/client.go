@@ -12,7 +12,11 @@ import (
 	"github.com/pebbe/zmq4"
 )
 
-var Client = &http.Client{}
+var Client = &http.Client{
+	Transport: &http.Transport{
+		DisableKeepAlives: true,
+	},
+}
 var sink *zmq4.Socket
 
 func init() {
