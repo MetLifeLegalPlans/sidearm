@@ -2,7 +2,7 @@
 
 Demolish your infrastructure.
 
-(spirit animal coming soon to a repo near you)
+![octopi 2 the octoping](octopi.png)
 
 ## Installing
 
